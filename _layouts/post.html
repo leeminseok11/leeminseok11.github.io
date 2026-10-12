@@ -1,0 +1,80 @@
+---
+layout: default
+---
+{% assign cat = page.categories | first %}
+{% assign chars = content | strip_html | size %}
+{% assign minutes = chars | divided_by: 700 | plus: 1 %}
+{% assign proj = nil %}
+{% if page.project %}{% assign proj = site.projects | where: "slug", page.project | first %}{% endif %}
+<article class="post">
+  <header class="post-header">
+    <div class="post-meta">
+      <a class="cat" data-cat="{{ cat }}" href="{{ '/posts/' | relative_url }}?cat={{ cat | url_encode }}">{{ cat }}</a>
+      <span class="dot" aria-hidden="true">·</span>
+      <time class="mono" datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y.%m.%d" }}</time>
+      <span class="dot" aria-hidden="true">·</span>
+      <span class="mono">{{ minutes }} min read</span>
+      {% if proj %}
+      <span class="dot" aria-hidden="true">·</span>
+      <a class="proj-link" href="{{ proj.url | relative_url }}">{{ proj.title }}</a>
+      {% endif %}
+    </div>
+    <h1 class="post-title">{{ page.title }}</h1>
+    {% if page.description %}<p class="post-lede">{{ page.description }}</p>{% endif %}
+    {% if page.tags.size > 0 %}
+    <ul class="taglist">
+      {% for t in page.tags %}<li><a href="{{ '/tags/' | relative_url }}#{{ t | slugify }}">#{{ t }}</a></li>{% endfor %}
+    </ul>
+    {% endif %}
+  </header>
+
+  <div class="post-layout">
+    <div class="prose post-body" id="post-body">
+      {{ content }}
+    </div>
+    <aside class="toc" aria-label="목차">
+      <div class="toc-label mono">ON THIS PAGE</div>
+      <nav id="toc"></nav>
+    </aside>
+  </div>
+
+  <footer class="post-footer">
+    {% if proj %}
+    <a class="proj-card" href="{{ proj.url | relative_url }}">
+      {% if proj.thumbnail %}<img src="{{ proj.thumbnail | relative_url }}" alt="" loading="lazy">{% endif %}
+      <div class="proj-card-body">
+        <div class="eyebrow mono">PROJECT {{ proj.order | prepend: '0' }}</div>
+        <strong>{{ proj.title }}</strong>
+        <p>{{ proj.summary }}</p>
+      </div>
+      <span class="proj-card-arrow mono" aria-hidden="true">↗</span>
+    </a>
+    {% assign siblings = site.posts | where: "project", page.project %}
+    {% if siblings.size > 1 %}
+    <section class="siblings">
+      <div class="eyebrow mono">같은 프로젝트의 다른 글</div>
+      <ul>
+        {% for s in siblings %}{% unless s.url == page.url %}
+        <li><a href="{{ s.url | relative_url }}">{{ s.title }}</a><time class="mono">{{ s.date | date: "%Y.%m.%d" }}</time></li>
+        {% endunless %}{% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+    {% endif %}
+
+    <nav class="pager" aria-label="이전·다음 글">
+      {% if page.previous %}
+      <a class="pager-item pager-prev" href="{{ page.previous.url | relative_url }}">
+        <span class="eyebrow mono">← 이전 글</span>
+        <span class="pager-title">{{ page.previous.title }}</span>
+      </a>
+      {% else %}<span></span>{% endif %}
+      {% if page.next %}
+      <a class="pager-item pager-next" href="{{ page.next.url | relative_url }}">
+        <span class="eyebrow mono">다음 글 →</span>
+        <span class="pager-title">{{ page.next.title }}</span>
+      </a>
+      {% endif %}
+    </nav>
+  </footer>
+</article>

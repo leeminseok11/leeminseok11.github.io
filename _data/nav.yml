@@ -1,0 +1,11 @@
+# 상단 메뉴 — 순서대로 01, 02 … 번호가 붙습니다.
+- title: 홈
+  url: /
+- title: 글
+  url: /posts/
+- title: 프로젝트
+  url: /projects/
+- title: 태그
+  url: /tags/
+- title: 소개
+  url: /about/

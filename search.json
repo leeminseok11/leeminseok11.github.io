@@ -1,0 +1,28 @@
+---
+layout: null
+sitemap: false
+---
+[
+{% for post in site.posts %}
+  {
+    "type": "post",
+    "title": {{ post.title | jsonify }},
+    "url": {{ post.url | relative_url | jsonify }},
+    "date": {{ post.date | date: "%Y.%m.%d" | jsonify }},
+    "category": {{ post.categories | first | jsonify }},
+    "tags": {{ post.tags | jsonify }},
+    "description": {{ post.description | default: "" | jsonify }}
+  },
+{% endfor %}
+{% for p in site.projects %}
+  {
+    "type": "project",
+    "title": {{ p.title | jsonify }},
+    "url": {{ p.url | relative_url | jsonify }},
+    "date": {{ p.period | default: "" | jsonify }},
+    "category": "프로젝트",
+    "tags": {{ p.tech | jsonify }},
+    "description": {{ p.summary | default: "" | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+{% endfor %}
+]

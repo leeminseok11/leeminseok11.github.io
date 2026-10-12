@@ -1,0 +1,29 @@
+# 기술 스택 — level: 3 주도적으로 사용 / 2 프로젝트에서 사용 / 1 기초 사용
+- group: Language
+  items:
+    - { name: Python, level: 3, note: 길봄 주행 · YOLO 파이프라인 / ERP }
+    - { name: SQL / MySQL, level: 2, note: 똑독 스키마 · 동적 쿼리 / SQLD }
+    - { name: JavaScript, level: 1, note: ERP Vue 3 화면 · 예측 계산 로직 }
+    - { name: C, level: 1, note: 미세먼지 pthread TCP 서버 }
+    - { name: PHP · C++(Arduino), level: 1, note: 똑독 / 미세먼지 펌웨어 }
+- group: Web · Backend
+  items:
+    - { name: Django 5 / DRF, level: 3, note: ERP 도메인 API · Serializer }
+    - { name: Vue 3 (Composition), level: 2, note: ERP 담당 도메인 화면 · 대시보드 }
+    - { name: REST API 설계, level: 2, note: "/api/v1/{앱}/ · _list/_detail 표준화" }
+    - { name: Pinia · Chart.js · FastAPI, level: 2, note: ERP 상태 · 차트 / 소비 AI 서버 }
+- group: AI · Embedded
+  items:
+    - { name: YOLO (Ultralytics), level: 3, note: YOLO26n 탐지 · 파인튜닝 }
+    - { name: TensorRT FP16 / ONNX, level: 3, note: Jetson 배포용 엔진 변환 }
+    - { name: Jetson Orin · Arduino, level: 3, note: 온디바이스 추론 / 센서 회로 }
+    - { name: OpenCV, level: 2, note: HSV 관측자 · 영상 처리 }
+    - { name: POSIX Socket · pthread, level: 1, note: 멀티스레드 서버 직접 설계 }
+- group: Infra · DevOps
+  items:
+    - { name: Docker / Compose, level: 2, note: 컨테이너 10개 · 4계층 망 격리 }
+    - { name: Nginx · Let's Encrypt, level: 2, note: HTTPS 종료 · 리버스 프록시 }
+    - { name: Jenkins CI/CD, level: 2, note: 조건부 병렬 빌드 · 빌드번호 태그 롤백 }
+    - { name: AWS EC2 · Linux · bash, level: 2, note: 프로비저닝 · 백업 · 헬스 감시 }
+    - { name: PostgreSQL 16 · Redis 7, level: 2, note: 운영 관점 — 설치 · 튜닝 · 인증 · 백업 }
+    - { name: Prometheus · Grafana, level: 2, note: 13패널 대시보드 · internal 망 }

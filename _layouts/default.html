@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="{{ site.lang | default: 'ko' }}">
+{% include head.html %}
+<body>
+<a class="skip-link" href="#main">본문으로 바로가기</a>
+{% include header.html %}
+<main id="main" class="wrap site-main">
+{{ content }}
+</main>
+{% include footer.html %}
+{% include search.html %}
+<script src="{{ '/assets/js/main.js' | relative_url }}" defer></script>
+</body>
+</html>

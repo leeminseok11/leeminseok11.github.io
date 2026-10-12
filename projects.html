@@ -1,0 +1,48 @@
+---
+layout: default
+title: 프로젝트
+permalink: /projects/
+description: 임베디드 · AI · 백엔드 · 인프라 — 직접 맡은 계층별 프로젝트 아카이브
+---
+{% assign projects = site.projects | sort: "order" %}
+{% assign all_domains = "" | split: "" %}
+{% assign all_tech = "" | split: "" %}
+{% for p in projects %}
+  {% assign all_domains = all_domains | concat: p.domains %}
+  {% assign all_tech = all_tech | concat: p.tech %}
+{% endfor %}
+{% assign all_domains = all_domains | uniq %}
+{% assign all_tech = all_tech | uniq %}
+
+<header class="page-head">
+  <div class="eyebrow">INDEX / PROJECTS</div>
+  <h1>프로젝트 <span class="count mono">{{ projects.size }}</span></h1>
+  <p class="lede muted">PHP·MySQL 스키마(2023)에서 아두이노·C 소켓 서버(2024), Django·Vue 풀스택, Jetson 자율주행·YOLO, EC2 컨테이너 운영(2026)까지 — 계층을 가리지 않고 직접 만들어 본 프로젝트들입니다.</p>
+</header>
+
+<div class="finder" id="finder">
+  <div class="finder-head">
+    <div><span class="eyebrow">PROJECT FINDER</span><br><strong>조건으로 프로젝트 찾기</strong></div>
+    <button class="finder-reset" type="button" data-finder-reset>선택 초기화</button>
+  </div>
+  <div class="finder-row">
+    <span class="eyebrow">도메인</span>
+    <div class="chips" role="group" aria-label="도메인 필터">
+      <button class="chip is-active" type="button" data-filter-domain="">전체</button>
+      {% for d in all_domains %}<button class="chip" type="button" data-filter-domain="{{ d }}">{{ d }}</button>{% endfor %}
+    </div>
+  </div>
+  <div class="finder-row">
+    <span class="eyebrow">기술</span>
+    <div class="chips" role="group" aria-label="기술 필터">
+      <button class="chip is-active" type="button" data-filter-tech="">전체</button>
+      {% for t in all_tech %}<button class="chip" type="button" data-filter-tech="{{ t }}">{{ t }}</button>{% endfor %}
+    </div>
+  </div>
+  <p class="finder-count">같은 그룹 안에서는 하나라도 맞으면 표시됩니다 · 프로젝트 <b id="finder-count">{{ projects.size }}</b>개</p>
+</div>
+
+<div class="project-grid">
+  {% for p in projects %}{% include project-card.html project=p %}{% endfor %}
+</div>
+<p class="empty" id="projects-empty" hidden>조건에 맞는 프로젝트가 없습니다. 선택을 줄여 보세요.</p>

@@ -1,0 +1,17 @@
+# 글 카테고리 — 글의 front matter `category:` 값과 이름이 같아야 합니다.
+# key 는 CSS 색상 매핑에 쓰입니다 (assets/css/main.css 의 [data-cat]).
+- name: 트러블슈팅
+  key: trouble
+  desc: 멀쩡해 보이던 시스템이 왜 무너졌는지, 원인을 어디까지 좁혔는지
+- name: 설계
+  key: design
+  desc: 문제를 다시 정의하고 구조를 고른 기록
+- name: 성능·정확도
+  key: perf
+  desc: 숫자가 나온 이유를 분리해서 올린 기록
+- name: 인프라·운영
+  key: ops
+  desc: 서버, 배포, 백업, 모니터링 — 사람이 안 봐도 도는 것
+- name: 회고
+  key: retro
+  desc: 팀과 나에 대해 남기는 글

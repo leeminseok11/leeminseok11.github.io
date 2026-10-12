@@ -1,0 +1,23 @@
+{% assign p = include.post %}
+{% assign cat = p.categories | first %}
+{% assign chars = p.content | strip_html | size %}
+{% assign minutes = chars | divided_by: 700 | plus: 1 %}
+{% assign pr = nil %}
+{% if p.project %}{% assign pr = site.projects | where: "slug", p.project | first %}{% endif %}
+<li class="post-item" data-post-cat="{{ cat }}">
+  <time class="post-item-date mono" datetime="{{ p.date | date_to_xmlschema }}">{{ p.date | date: "%Y.%m.%d" }}</time>
+  <div class="post-item-body">
+    <div class="post-item-meta">
+      <span class="cat" data-cat="{{ cat }}">{{ cat }}</span>
+      {% if pr %}<span class="dot" aria-hidden="true">·</span><span class="proj">{{ pr.title }}</span>{% endif %}
+      <span class="dot" aria-hidden="true">·</span><span class="mono">{{ minutes }} min</span>
+    </div>
+    <h3 class="post-item-title"><a href="{{ p.url | relative_url }}">{{ p.title }}</a></h3>
+    {% if p.description %}<p class="post-item-desc">{{ p.description }}</p>{% endif %}
+    {% if p.tags.size > 0 %}
+    <ul class="taglist">
+      {% for t in p.tags limit: 5 %}<li><a href="{{ '/tags/' | relative_url }}#{{ t | slugify }}">#{{ t }}</a></li>{% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+</li>

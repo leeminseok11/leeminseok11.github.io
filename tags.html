@@ -1,0 +1,30 @@
+---
+layout: default
+title: 태그
+permalink: /tags/
+description: 태그별 글 모아보기
+---
+{% assign tags = site.tags | sort %}
+<header class="page-head">
+  <div class="eyebrow">INDEX / TAGS</div>
+  <h1>태그 <span class="count mono">{{ tags.size }}</span></h1>
+  <p class="lede muted">기술과 주제로 글을 묶었습니다. 태그를 누르면 해당 목록으로 이동합니다.</p>
+</header>
+
+<div class="tag-cloud">
+  {% for t in tags %}
+  {% assign n = t[1] | size %}
+  <a href="#{{ t[0] | slugify }}"{% if n > 2 %} class="is-big"{% endif %}>#{{ t[0] }}<span class="n">{{ n }}</span></a>
+  {% endfor %}
+</div>
+
+{% for t in tags %}
+<section class="tag-section">
+  <h2 id="{{ t[0] | slugify }}">#{{ t[0] }}<span class="n mono">{{ t[1] | size }}</span></h2>
+  <ul>
+    {% for post in t[1] %}
+    <li><time class="mono">{{ post.date | date: "%Y.%m.%d" }}</time><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+    {% endfor %}
+  </ul>
+</section>
+{% endfor %}

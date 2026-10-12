@@ -1,0 +1,24 @@
+{% assign p = include.project %}
+<article class="project-card" data-domains="{{ p.domains | join: '|' }}" data-tech="{{ p.tech | join: '|' }}">
+  <a class="project-card-thumb" href="{{ p.url | relative_url }}" tabindex="-1" aria-hidden="true">
+    {% if p.thumbnail %}<img src="{{ p.thumbnail | relative_url }}" alt="" loading="lazy">{% endif %}
+  </a>
+  <div class="project-card-body">
+    <div class="project-card-meta mono">
+      <span class="num">{{ p.order | prepend: '0' }}</span>
+      {% if p.status %}<span class="status">{{ p.status }}</span>{% endif %}
+      <span class="group">{{ p.group }}</span>
+    </div>
+    <h3 class="project-card-title">
+      <a href="{{ p.url | relative_url }}">{{ p.title }}</a>
+      {% if p.award %}<span class="award">{{ p.award }}</span>{% endif %}
+    </h3>
+    <p class="project-card-summary">{{ p.summary }}</p>
+    <div class="project-card-role"><span class="mono eyebrow">ROLE</span> {{ p.role }}</div>
+    <ul class="taglist">
+      {% for d in p.domains %}<li class="is-domain">{{ d }}</li>{% endfor %}
+      {% for t in p.tech limit: 5 %}<li>#{{ t }}</li>{% endfor %}
+    </ul>
+    <a class="more" href="{{ p.url | relative_url }}">상세 보기 ↗</a>
+  </div>
+</article>

@@ -1,0 +1,72 @@
+---
+layout: default
+---
+{% assign ps = site.projects | sort: "order" %}
+{% assign idx = 0 %}
+{% for p in ps %}{% if p.slug == page.slug %}{% assign idx = forloop.index0 %}{% endif %}{% endfor %}
+{% assign prev_i = idx | minus: 1 %}
+{% assign next_i = idx | plus: 1 %}
+<article class="project">
+  <header class="project-header">
+    <div class="eyebrow mono">PROJECT {{ page.order | prepend: '0' }} · {{ page.group }}{% if page.status %} · {{ page.status }}{% endif %}</div>
+    <h1 class="project-title">{{ page.title }}{% if page.award %} <span class="award">{{ page.award }}</span>{% endif %}</h1>
+    <p class="post-lede">{{ page.summary }}</p>
+    <dl class="meta-grid">
+      <div><dt class="mono">기간</dt><dd>{{ page.period }}</dd></div>
+      <div><dt class="mono">팀</dt><dd>{{ page.team }}</dd></div>
+      <div><dt class="mono">역할</dt><dd>{{ page.role }}</dd></div>
+      <div><dt class="mono">스택</dt><dd>{{ page.tech | join: " · " }}</dd></div>
+      {% if page.repo or page.demo %}
+      <div><dt class="mono">링크</dt><dd>
+        {% if page.repo %}<a href="{{ page.repo }}" target="_blank" rel="noopener">GitHub ↗</a>{% endif %}
+        {% if page.demo %}{% if page.repo %} · {% endif %}<a href="{{ page.demo }}" target="_blank" rel="noopener">Demo ↗</a>{% endif %}
+      </dd></div>
+      {% endif %}
+    </dl>
+    {% if page.domains.size > 0 or page.tech.size > 0 %}
+    <ul class="taglist">
+      {% for d in page.domains %}<li class="is-domain">{{ d }}</li>{% endfor %}
+      {% for t in page.tech %}<li>#{{ t }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+  </header>
+
+  {% if page.hero %}
+  <figure class="project-hero">
+    <img src="{{ page.hero | relative_url }}" alt="{{ page.hero_alt | default: page.title }}">
+    {% if page.hero_caption %}<figcaption>{{ page.hero_caption }}</figcaption>{% endif %}
+  </figure>
+  {% endif %}
+
+  <div class="prose project-body">
+    {{ content }}
+  </div>
+
+  {% assign related = site.posts | where: "project", page.slug %}
+  {% if related.size > 0 %}
+  <section class="section related">
+    <div class="section-head">
+      <span class="eyebrow mono">RELATED POSTS</span>
+      <h2>이 프로젝트에서 쓴 글 <span class="count mono">{{ related.size }}</span></h2>
+    </div>
+    <ul class="post-list">
+      {% for post in related %}{% include post-item.html post=post %}{% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  <nav class="pager" aria-label="이전·다음 프로젝트">
+    {% if idx > 0 %}{% assign prevp = ps[prev_i] %}
+    <a class="pager-item pager-prev" href="{{ prevp.url | relative_url }}">
+      <span class="eyebrow mono">← 이전 프로젝트</span>
+      <span class="pager-title">{{ prevp.title }}</span>
+    </a>
+    {% else %}<span></span>{% endif %}
+    {% if next_i < ps.size %}{% assign nextp = ps[next_i] %}
+    <a class="pager-item pager-next" href="{{ nextp.url | relative_url }}">
+      <span class="eyebrow mono">다음 프로젝트 →</span>
+      <span class="pager-title">{{ nextp.title }}</span>
+    </a>
+    {% endif %}
+  </nav>
+</article>

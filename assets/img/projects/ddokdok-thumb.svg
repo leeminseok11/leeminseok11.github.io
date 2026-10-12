@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="똑독 구독 관리 플랫폼">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4f1ea"/><stop offset="1" stop-color="#e9e4d8"/></linearGradient>
+  </defs>
+  <rect width="640" height="360" fill="url(#bg)"/>
+  <!-- window -->
+  <rect x="72" y="46" width="496" height="268" rx="14" fill="#ffffff" stroke="#d9d3c5"/>
+  <rect x="72" y="46" width="496" height="44" rx="14" fill="#1f2937"/>
+  <rect x="72" y="76" width="496" height="14" fill="#1f2937"/>
+  <text x="96" y="75" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" font-size="18" font-weight="700" fill="#ffffff">똑독</text>
+  <text x="540" y="74" text-anchor="end" font-family="JetBrains Mono, ui-monospace, Menlo, Consolas, monospace" font-size="11" fill="#cbd5e1">PHP · MySQL 8.0</text>
+  <!-- banner -->
+  <rect x="96" y="106" width="448" height="40" rx="8" fill="#eef2ff" stroke="#c7d2fe"/>
+  <text x="112" y="131" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" font-size="12" fill="#3730a3">타겟 광고 · 성별 × 연령대 배너 → 클릭 → 해당 회사 구독 목록</text>
+  <!-- table header -->
+  <g font-family="JetBrains Mono, ui-monospace, Menlo, Consolas, monospace" font-size="11" fill="#6b7280">
+    <text x="96" y="172">SERVICE</text><text x="300" y="172">NEXT PAYMENT</text><text x="430" y="172">PRICE</text>
+  </g>
+  <line x1="96" y1="180" x2="544" y2="180" stroke="#e5e7eb"/>
+  <g font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" font-size="13" fill="#111827">
+    <text x="96" y="204">OTT 스트리밍 · 프리미엄</text><text x="300" y="204" font-family="JetBrains Mono, monospace" font-size="12">2023-12-14</text><text x="430" y="204" font-family="JetBrains Mono, monospace" font-size="12">17,000</text>
+    <text x="96" y="234">음악 · 패밀리</text><text x="300" y="234" font-family="JetBrains Mono, monospace" font-size="12">2023-12-21</text><text x="430" y="234" font-family="JetBrains Mono, monospace" font-size="12">10,900</text>
+    <text x="96" y="264">생필품 정기배송</text><text x="300" y="264" font-family="JetBrains Mono, monospace" font-size="12">2024-01-02</text><text x="430" y="264" font-family="JetBrains Mono, monospace" font-size="12">29,000</text>
+  </g>
+  <line x1="96" y1="214" x2="544" y2="214" stroke="#f3f4f6"/><line x1="96" y1="244" x2="544" y2="244" stroke="#f3f4f6"/>
+  <rect x="96" y="282" width="448" height="1" fill="#e5e7eb"/>
+  <text x="544" y="302" text-anchor="end" font-family="JetBrains Mono, ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#111827" font-weight="600">TOTAL  56,900 / mo</text>
+  <text x="96" y="338" font-family="JetBrains Mono, ui-monospace, Menlo, Consolas, monospace" font-size="11" fill="#9ca3af">7 TABLES · COMPOSITE PK · 3-WAY JOIN · NOT IN (...) FILTER</text>
+</svg>

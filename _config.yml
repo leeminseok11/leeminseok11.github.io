@@ -1,0 +1,83 @@
+# ---------------------------------------------------------------
+# mseok.log — 이민석의 개발 기록
+# GitHub Pages가 이 파일을 읽어 Jekyll로 빌드합니다. 값을 바꾸면 푸시 후 1~2분 뒤 반영됩니다.
+# ---------------------------------------------------------------
+title: mseok.log
+tagline: 임베디드부터 서버까지, 시스템의 아래층을 직접 깔아 본 기록
+description: >-
+  이민석의 개발 블로그. 자율주행 로봇, 서버 인프라, 백엔드, 데이터 — 프로젝트에서 부딪힌 문제와
+  그 해결 과정, 설계 판단과 회고를 남깁니다.
+url: "https://leeminseok11.github.io"
+baseurl: ""
+lang: ko
+timezone: Asia/Seoul
+locale: ko_KR
+
+author:
+  name: 이민석
+  email: mseok8199@naver.com
+  github: leeminseok11
+  role: Embedded · Backend · Infra Engineer
+
+social:
+  name: 이민석
+  links:
+    - https://github.com/leeminseok11
+
+# ---- 글 ----
+permalink: /posts/:title/
+excerpt_separator: "<!--more-->"
+future: false
+
+# ---- 마크다운 / 코드 하이라이트 ----
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: highlight
+  toc_levels: 2..3
+
+# ---- 플러그인 (GitHub Pages 허용 목록) ----
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+
+feed:
+  path: feed.xml
+  posts_limit: 20
+
+# ---- 컬렉션: 프로젝트 ----
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: project
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - node_modules
+  - vendor
+  - .bundle
+  - .jekyll-cache
+  - "*.gem"
