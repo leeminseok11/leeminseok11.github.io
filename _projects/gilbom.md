@@ -10,9 +10,9 @@ role: 임베디드팀 팀장 — 자율주행 로직 · 파손 판정 모델 · 
 award: 공통프로젝트 최우수상
 summary: 점자블록 파손을 찾아내는 자율주행 순찰 로봇과 관제 플랫폼. 인도 자율주행 → 파손 판정 → 사진·GPS 태깅 → 관제 지도까지 한 흐름으로 이어진다.
 thumbnail: /assets/img/projects/gilbom-robot.webp
-hero: /assets/img/projects/gilbom-dfd.png
-hero_alt: 길봄 데이터 흐름도
-hero_caption: 로봇(Jetson Orin Nano) → MQTTS / HTTPS → 서버 → 관제 웹으로 이어지는 데이터 흐름
+hero: /assets/img/projects/gilbom-robot-full.png
+hero_alt: 길봄 순찰 로봇 — 전방 주행 카메라 마스트와 하향 검사 카메라
+hero_caption: 직접 설계·배선한 순찰 로봇. 위쪽 마스트의 전방 카메라가 주행을, 아래쪽 하향 카메라가 점자블록 파손 판정을 맡는다.
 domains: [임베디드, AI]
 tech: [Python, Jetson Orin Nano, YOLO, TensorRT, OpenCV, pytest, MQTT]
 repo: https://github.com/leeminseok11/gilbom_pjt
@@ -26,13 +26,35 @@ repo: https://github.com/leeminseok11/gilbom_pjt
 
 로봇 저장소의 책임은 1~5단계이고, 6단계(서버 전송·지도 핀)는 통신 코드가 담당합니다.
 
-## 시스템 구성
+## 사진으로 보는 길봄
 
-```
-Browser ──HTTPS 443──> Nginx ──/api──> Spring Backend ──JDBC──> PostgreSQL/PostGIS
-Robot   ──MQTTS 8883─────────────────> Mosquitto ─────────────> Backend
-Robot   ──HTTPS 이미지 업로드─────────> Nginx ────────────────> Backend
-```
+<figure>
+  <img src="/assets/img/projects/gilbom-robot-sidewalk.png" alt="인도 위를 순찰 중인 길봄 로봇" loading="lazy">
+  <figcaption>인도 위를 순찰 중인 로봇 — 노란 점자블록 띠를 따라 주행하며 하향 카메라로 블록 상태를 판정한다</figcaption>
+</figure>
+
+<figure>
+  <img src="/assets/img/projects/gilbom-drive-overlay.png" alt="주행 카메라 세그멘테이션 오버레이 — 진행 코리도·중심선·조향 목표" loading="lazy">
+  <figcaption>주행 테스트 화면 — 세그멘테이션 오버레이 위에 진행 코리도(노란 상자)·중심선(초록 곡선)·조향 목표(원)를 표시. roadway·caution_zone 은 회피 대상으로 분류된다</figcaption>
+</figure>
+
+<div class="stats">
+  <div><img src="/assets/img/projects/gilbom-detect-result-1.png" alt="파손 점자블록 판정 결과 — 빨간 박스" loading="lazy"><span>파손 판정 (빨간 박스)</span></div>
+  <div><img src="/assets/img/projects/gilbom-detect-result-2.png" alt="정상 점자블록 판정 결과 — 초록 박스" loading="lazy"><span>정상 판정 (초록 박스)</span></div>
+</div>
+
+<figure>
+  <img src="/assets/img/projects/gilbom-dataset-aug.png" alt="학습 데이터 증강 — 회전·축소·격자 합성" loading="lazy">
+  <figcaption>학습 데이터 재구성 — 절반 90° 회전, 웹캠 시야에 맞춘 축소·다중 배치 격자 합성. 세로형 박스 비율 99.3% → 49.9%</figcaption>
+</figure>
+
+<div class="stats">
+  <div><img src="/assets/img/projects/gilbom-wiring.png" alt="로봇 내부 배선 — Jetson, 모터 HAT, 배터리" loading="lazy"><span>내부 배선 — Jetson · 모터 HAT · 서보 보드 · 배터리</span></div>
+  <div><img src="/assets/img/projects/gilbom-jetson.png" alt="Jetson Orin Nano 보드" loading="lazy"><span>Jetson Orin Nano</span></div>
+  <div><img src="/assets/img/projects/gilbom-web-map.png" alt="관제 웹 지도 — 로봇 위치와 결함 마커" loading="lazy"><span>관제 웹 — 로봇 위치·결함 마커 (웹팀)</span></div>
+</div>
+
+## 시스템 구성
 
 | 구분 | 버전 |
 |---|---|
@@ -41,7 +63,7 @@ Robot   ──HTTPS 이미지 업로드─────────> Nginx ──
 | Frontend | React 19, Node 24 |
 | Web/DB/MQTT | Nginx 1.30, PostgreSQL 16 + PostGIS 3.5, Mosquitto 2.1 |
 
-운영 외부 공개 포트는 `80`·`443`·`8883`뿐이고, 로봇이 구독하는 토픽은 `commands/request` 하나입니다.
+로봇은 MQTTS(8883)로 상태·이벤트를 보내고 사진은 HTTPS로 올립니다. 로봇이 구독하는 토픽은 `commands/request` 하나입니다.
 
 ## 내가 맡은 것
 

@@ -10,9 +10,9 @@ role: 구매/BOM · 재고 · 물류 도메인 end-to-end · AI 수요예측 · 
 award: 관통프로젝트 우수상
 summary: 영업·구매·재무·인사·물류·재고를 하나로 묶은 ERP. Northwind를 확장한 시드 29,611건 위에서 2인이 백/프론트 구분 없이 도메인을 통째로 나눠 만들었다.
 thumbnail: /assets/img/projects/erp-purchase-order.webp
-hero: /assets/img/projects/erp-erd.svg
-hero_alt: ERP 전체 ERD — 10개 앱 41개 테이블
-hero_caption: 10개 Django 앱 · 41개 테이블. EMPLOYEE 가 주문 담당자, 발주 담당자, 캘린더·업무 소유자, 메신저 발신자까지 거의 모든 도메인의 허브다.
+hero: /assets/img/projects/erp-home.webp
+hero_alt: ERP 홈 화면 — 캘린더 · 진행 중인 업무 · 근태 · 알림 · 사내 메신저
+hero_caption: 홈 화면 — 캘린더, 진행 중인 업무, 근태, 알림, 그리고 WebSocket 사내 메신저(우측 하단)가 한 화면에 모인다.
 domains: [백엔드, 프론트엔드, 데이터]
 tech: [Django, DRF, Vue 3, Pinia, Chart.js, Django Channels, SQLite]
 repo: https://github.com/leeminseok11/erp_pjt
@@ -52,7 +52,10 @@ Northwind 데이터셋을 기반으로 한 가상의 국제 무역회사 "SSAFY 
 
 도메인 앱마다 `_list`(GET 목록 + POST 생성)와 `_detail`(GET 단건 + PUT/PATCH + DELETE) 두 종류의 함수형 뷰로 패턴을 통일했습니다. PurchaseOrder/GoodsReceipt(구매), Dispatch/Vehicle(물류), Order/Customer(영업) 모두 같은 구조라 새 리소스를 추가할 때 그대로 재사용합니다. 직렬화는 `ModelSerializer` + `source=`로 화면에서 바로 쓸 이름(`supplier_name`, `category_name`)을 서버에서 JOIN 해 내려줍니다.
 
-![발주 관리 화면 — 구매 도메인 CRUD](/assets/img/projects/erp-purchase-order.webp)
+<figure>
+  <img src="/assets/img/projects/erp-purchase-order-modal.webp" alt="발주 관리 화면 — 발주 목록과 발주등록 모달" loading="lazy">
+  <figcaption>발주 관리 — 이번달 발주 44건·발주대기 7건·지연 7건 KPI, 검색/상태/물류센터 필터, 발주등록 모달(공급업체·물류센터·품목·예상 발주금액). 상태 배지(발주대기·입고완료)와 지연 표시까지 한 화면에서 처리한다</figcaption>
+</figure>
 
 ### AI 수요예측
 
@@ -64,7 +67,10 @@ Northwind 데이터셋을 기반으로 한 가상의 국제 무역회사 "SSAFY 
 4. **백테스트** — train/test 75:25로 나눠 MAPE를 재고 `100 - MAPE`를 정확도로 표시
 5. **제품별** — 최근 6건을 전·후반으로 나눠 성장률을 추정하고, 현재고 ÷ 평균 판매량 = "공급 가능 월수"로 과잉/부족을 판정
 
-![AI 수요예측 — 선형회귀 추세 · 95% 신뢰구간 · 백테스트 정확도](/assets/img/projects/erp-demand-forecast.webp)
+<figure>
+  <img src="/assets/img/projects/erp-ai-forecast.webp" alt="AI 예측 화면 — 월별 매출 실적 vs 예측, 95% 신뢰구간, 백테스트 정확도" loading="lazy">
+  <figcaption>AI 예측 — 월별 매출 실적(파랑) 위에 다음 3개월 예측(주황 점선)과 95% 신뢰구간 띠를 그린다. 상단 KPI: 백테스트 정확도 83.2% · 2026-07 예측 매출 8,990만원 · 신뢰구간 ±23.8% · 재고과잉 위험 2종. 하단에 "기준일: 데이터상 최신 주문월 · 희소 구간 제외"를 명시했다</figcaption>
+</figure>
 
 ### Works — 캘린더 · 업무 · AI 워크플로우 추천
 

@@ -365,6 +365,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .prose .stats b { display: block; font-family: var(--font-mono); font-size: 22px; font-weight: 600; letter-spacing: -.02em; color: var(--ink); }
 .prose .stats span { font-size: 12.5px; color: var(--muted); }
 .prose .stats i { font-style: normal; font-size: 12px; color: var(--muted); display: block; margin-top: 2px; }
+.prose .stats img { width: 100%; border-radius: var(--radius-sm); border: 1px solid var(--line); margin-bottom: 8px; background: var(--surface-2); }
 .prose .arrow { color: var(--accent); font-weight: 600; }
 
 /* ---------- rouge (코드 하이라이트, 항상 다크) ---------- */
